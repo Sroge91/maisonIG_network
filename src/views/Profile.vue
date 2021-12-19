@@ -3,7 +3,9 @@
     <v-btn class="ma-5 green white--text" @click="goBack()"
       >Retourner à l'accueil</v-btn
     >
-    <h1>Mon profil</h1>
+    <div id="content">
+      <h1>Mon profil</h1>
+    </div>
   </div>
 </template>
 
@@ -17,5 +19,22 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+#content {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+.illustration {
+  display: block;
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  max-height: 300px;
+  max-width: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+p {
+  margin: 2%;
+}
 </style>

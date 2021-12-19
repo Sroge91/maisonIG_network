@@ -1,7 +1,6 @@
 <template>
   <v-container>
     <LeftDrawer />
-    <Discussion />
     <h1>Actualités</h1>
     <div v-for="article in articles" :key="article.id">
       <div class="article" @click="showArticle(article.id)">
@@ -19,12 +18,11 @@
 </template>
 
 <script>
-import Discussion from "../components/Discussion.vue";
 import LeftDrawer from "../components/LeftDrawer.vue";
 const axios = require("axios");
 
 export default {
-  components: { Discussion, LeftDrawer },
+  components: { LeftDrawer },
   name: "Home",
   data() {
     return {
@@ -53,7 +51,6 @@ export default {
       this.articles.sort(function (a, b) {
         return new Date(b.date_created) - new Date(a.date_created);
       });
-      console.log("TEST" + this.articles[0].id)
     },
     showArticle: function (id) {
       this.$router.push({ name: "Article", params: { id: id } });
@@ -62,7 +59,8 @@ export default {
       let date_publication = "";
       let d = new Date(date_article);
 
-      date_publication = d.getDay().toString() + " ";
+      const indexDay = date_article.indexOf("T")-2;
+      date_publication = date_article[indexDay] + date_article[indexDay+1] + " "
 
       switch (d.getMonth()) {
         case 0:

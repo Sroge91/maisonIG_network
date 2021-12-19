@@ -9,7 +9,7 @@
     
     <div id="article">
       <h1>{{ article.title }}</h1>
-      <p class="date">Publié le {{ displayDateArticle(article.date_created) }} par {{article.author}}</p>
+      <p class="date">Publié le {{ date }} par {{article.author}}</p>
       <p>
         <img
           :src="`http://localhost:8055/assets/` + article.image"
@@ -31,6 +31,7 @@ export default {
   data() {
     return {
       article: [],
+      date: "",
     };
   },
   mounted() {
@@ -40,17 +41,21 @@ export default {
     getArticle(id) {
       axios({
         method: "get",
-        url: "http://192.168.1.124:8055/items/Articles/" + id,
+        url: "http://localhost:8055/items/Articles/" + id,
       }).then((response) => {
         this.article = response.data.data;
         document.getElementById("content").innerHTML = this.article.content;
+        this.date = this.displayDateArticle(this.article.date_created)
       });
     },
     displayDateArticle(date_article) {
       let date_publication = "";
       let d = new Date(date_article);
 
-      date_publication = d.getDay().toString() + " ";
+      //console.log(date_article)
+
+      const indexDay = date_article.indexOf("T")-2;
+      date_publication = date_article[indexDay] + date_article[indexDay+1] + " "
 
       switch (d.getMonth()) {
         case 0:

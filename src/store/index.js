@@ -12,8 +12,7 @@ const axios = require('axios');
 
 export default new Vuex.Store({
     state: {
-        status: 'connected',
-        // status: '',
+        status: '',
         userInfos: {
             nom: '',
             prenom: '',
